@@ -98,4 +98,8 @@ VERSION_ID="20.04"
 
 ```
 
+### introduction to SHELL 
+
+<img src="shell.png">
+
 
