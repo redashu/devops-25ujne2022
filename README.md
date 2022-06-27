@@ -44,3 +44,58 @@ fire@node155:~$
 
 
 ```
+
+### file vs folder 
+
+<img src="file1.png">
+
+### creation of files 
+
+<img src="file2.png">
+
+### method 1
+
+```
+ >hiii.txt
+fire@node155:/tmp/ashu$ ls
+hiii.txt
+fire@node155:/tmp/ashu$ ls -l
+total 0
+-rw-rw-r-- 1 fire fire 0 Jun 27 05:04 hiii.txt
+
+```
+
+### remove files 
+
+```
+ rm hiii.txt 
+```
+
+### vim 
+
+<img src="vim.png">
+
+### to read data of afile 
+
+```
+cat  ok.txt 
+hello guys how are you ..?
+
+all good ..?
+
+```
+
+### checking os name 
+
+```
+ cat  /etc/os-release  
+NAME="Ubuntu"
+VERSION="20.04.3 LTS (Focal Fossa)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 20.04.3 LTS"
+VERSION_ID="20.04"
+
+```
+
+
