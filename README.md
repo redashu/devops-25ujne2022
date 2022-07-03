@@ -171,6 +171,140 @@ baby@babykool:~$ grep -w  hello  /tmp/hello.txt
 hii hello 
 
 ```
+### Demo 3 
 
+```
+grep  -i hello  /tmp/hello.txt 
+hii hello 
+dfds Hello skdjfdsf
+sdfjds HELLO 
+sdfjds HELLO 
+sdfjds HELLO 
+ksdjflkdsjfds helloksdjfldsjfdsf ksdjlf
+baby@babykool:~$ grep  -iw  hello  /tmp/hello.txt 
+hii hello 
+dfds Hello skdjfdsf
+sdfjds HELLO 
+sdfjds HELLO 
+sdfjds HELLO 
+
+```
+### Demo 4
+
+```
+grep  -iv  hello  /tmp/hello.txt 
+sdffkdsf ;ls
+
+
+dskfsdf
+
+```
+
+### pipeline 
+
+```
+baby@babykool:~$ cal
+     July 2022        
+Su Mo Tu We Th Fr Sa  
+                1  2  
+ 3  4  5  6  7  8  9  
+10 11 12 13 14 15 16  
+17 18 19 20 21 22 23  
+24 25 26 27 28 29 30  
+31                    
+baby@babykool:~$ cal    |  
+> wc  -l  
+8
+baby@babykool:~$ cal  |  wc -l 
+8
+baby@babykool:~$ cal  |  wc -w
+41
+baby@babykool:~$ cal  |  wc -c
+188
+baby@babykool:~$ cal  |  wc 
+      8      41     188
+baby@babykool:~$ wc  output.txt 
+  8  41 188 output.txt
+
+```
+
+### pipeline demo 
+
+```
+baby@babykool:~$ cat /tmp/hello.txt   |  tr 'a-z' 'A-Z'
+HII HELLO 
+SDFFKDSF ;LS
+
+DFDS HELLO SKDJFDSF
+
+SDFJDS HELLO 
+SDFJDS HELLO 
+DSKFSDF
+SDFJDS HELLO 
+KSDJFLKDSJFDS HELLOKSDJFLDSJFDSF KSDJLF
+baby@babykool:~$ cat /tmp/hello.txt   |  tr 'a-z' 'A-Z'  >/tmp/caps.txt
+baby@babykool:~$ 
+
+```
+
+### demo 5
+
+```
+baby@babykool:~$ cal 
+     July 2022        
+Su Mo Tu We Th Fr Sa  
+                1  2  
+ 3  4  5  6  7  8  9  
+10 11 12 13 14 15 16  
+17 18 19 20 21 22 23  
+24 25 26 27 28 29 30  
+31                    
+baby@babykool:~$ cal | tail -2
+24 25 26 27 28 29 30  
+31                    
+baby@babykool:~$ cal | tail -3
+17 18 19 20 21 22 23  
+24 25 26 27 28 29 30  
+31                    
+baby@babykool:~$ cal | head  -3
+     July 2022        
+Su Mo Tu We Th Fr Sa  
+                1  2  
+baby@babykool:~$ cal | head  -3 |  grep j 
+baby@babykool:~$ cal | head  -3 |  grep -i j 
+     July 2022        
+baby@babykool:~$ cal | head  -3 |  grep -i j  |  wc -w 
+2
+baby@babykool:~$ cal | head  -3 |  grep -i j  |  wc -c
+23
+baby@babykool:~$ cal | head  -3 |  grep -i j  |  wc -c >/tmp/n.txt 
+baby@babykool:~$ 
+
+
+```
+
+###
+
+```
+baby@babykool:~$ cal 
+     July 2022        
+Su Mo Tu We Th Fr Sa  
+                1  2  
+ 3  4  5  6  7  8  9  
+10 11 12 13 14 15 16  
+17 18 19 20 21 22 23  
+24 25 26 27 28 29 30  
+31                    
+baby@babykool:~$ cal   |  tail -4
+10 11 12 13 14 15 16  
+17 18 19 20 21 22 23  
+24 25 26 27 28 29 30  
+31                    
+baby@babykool:~$ cal   |  tail -4 |  head -2
+10 11 12 13 14 15 16  
+17 18 19 20 21 22 23  
+baby@babykool:~$ 
+
+```
 
 
