@@ -84,3 +84,16 @@ mail:x:8:8:mail:/var/mail:
 
 <img src="passwd.png">
 
+### as a best always take backup of /etc/passwd 
+
+```
+ubuntu@devops-test:~$ 
+ubuntu@devops-test:~$ cp /etc/passwd /etc/passwd.backup 
+cp: cannot create regular file '/etc/passwd.backup': Permission denied
+ubuntu@devops-test:~$ sudo cp /etc/passwd /etc/passwd.backup 
+ubuntu@devops-test:~$ 
+
+```
+
+
+
