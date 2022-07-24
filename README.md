@@ -68,3 +68,42 @@ root@ip-172-31-17-34 html]# systemctl start  httpd
 
 ```
 
+###  now configure virtual hosting 
+
+```
+[root@ip-172-31-17-34 html]# cd /etc/httpd/conf.d/
+[root@ip-172-31-17-34 conf.d]# ls
+ashu.conf       bhupesh.conf  mrinal.conf  userdir.conf
+autoindex.conf  default.conf  README       welcome.conf
+[root@ip-172-31-17-34 conf.d]# cat  ashu.conf 
+<virtualhost  *:80>
+servername  www.ashu.com
+documentroot  /var/www/ashu/
+</virtualhost>
+
+```
+
+### for others like bhupesh 
+
+```
+root@ip-172-31-17-34 conf.d]# cat bhupesh.conf 
+<virtualhost *:80>
+servername  www.bhupesh.com
+documentroot  /var/www/bhupesh/
+</virtualhost>
+
+```
+
+### restart httpd service 
+
+```
+[root@ip-172-31-17-34 conf.d]# systemctl restart httpd 
+[root@ip-172-31-17-34 conf.d]# systemctl status  httpd 
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Sun 2022-07-24 06:35:37 UTC; 5s ago
+     Docs: man:httpd.service(8)
+ Main PID: 2759 (httpd)
+   Status: "Processing r
+```
+
