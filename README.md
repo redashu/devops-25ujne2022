@@ -40,3 +40,27 @@ root@ip-172-31-17-34 html]# systemctl start  httpd
  Main PID: 4677 (ht
 ```
 
+### Now final job is to map  apache httpd 
+
+```
+root@ip-172-31-17-34 www]# cd  /etc/httpd/
+[root@ip-172-31-17-34 httpd]# ls
+conf  conf.d  conf.modules.d  logs  modules  run  state
+[root@ip-172-31-17-34 httpd]# cd  conf.d/
+[root@ip-172-31-17-34 conf.d]# ls
+autoindex.conf  README  userdir.conf  welcome.conf
+[root@ip-172-31-17-34 conf.d]# 
+
+
+```
+### creating ashu.conf under above location 
+
+```
+[root@ip-172-31-17-34 conf.d]# cat ashu.conf 
+<virtualhost  *:80>
+servername  www.ashu.com
+documentroot  /var/www/ashu/
+</virtualhost>
+```
+
+
