@@ -39,28 +39,32 @@ root@ip-172-31-17-34 html]# systemctl start  httpd
      Docs: man:httpd.service(8)
  Main PID: 4677 (ht
 ```
+### Understanding Virtualhosting 
 
-### Now final job is to map  apache httpd 
+<img src="vh.png">
 
-```
-root@ip-172-31-17-34 www]# cd  /etc/httpd/
-[root@ip-172-31-17-34 httpd]# ls
-conf  conf.d  conf.modules.d  logs  modules  run  state
-[root@ip-172-31-17-34 httpd]# cd  conf.d/
-[root@ip-172-31-17-34 conf.d]# ls
-autoindex.conf  README  userdir.conf  welcome.conf
-[root@ip-172-31-17-34 conf.d]# 
-
+### creating folder under /var/www/  with the name of customers  and copy their website 
 
 ```
-### creating ashu.conf under above location 
+ 21  git clone https://github.com/microsoft/project-html-website
+   22  ls
+   23  git clone https://github.com/yenchiah/project-website-template
+   24  ls
+   25  ls html-sample-app/
+   26  ls  project-html-website/
+   27  cd  /var/www/
+   28  ls
+   29  mkdir  ashu
+   30  ls
+   31  mkdir mrinal 
+   32  ls
+   33  mkdir  bhupesh 
+   34  ls
+   35  cd
+   36  ls
+   37  cp -rf html-sample-app/*  /var/www/bhupesh/
+   38  cp -rf  project-html-website/*  /var/www/mrinal/
+   39  cp -rf  project-website-template/*  /var/www/ashu/
 
 ```
-[root@ip-172-31-17-34 conf.d]# cat ashu.conf 
-<virtualhost  *:80>
-servername  www.ashu.com
-documentroot  /var/www/ashu/
-</virtualhost>
-```
-
 
