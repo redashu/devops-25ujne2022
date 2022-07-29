@@ -113,3 +113,62 @@ hello.sh
 fire@node155:~/myscripts$ 
 ```
 
+
+### demo 2
+
+```
+fire@node155:~/myscripts$ cat userinput.sh 
+#!/usr/bin/bash
+
+echo  "hey please enter any command to run : "
+
+# read is reading user input and storing into some variable 
+read  x
+sleep 2 
+echo "Hey you have entered  $x "
+echo "please wait your command is about to RUn : ...>"
+sleep 1
+$x
+fire@node155:~/myscripts$ bash userinput.sh 
+hey please enter any command to run : 
+uptime
+Hey you have entered  uptime 
+please wait your command is about to RUn : ...>
+ 04:51:12 up 11 days,  7:51,  2 users,  load average: 0.09, 0.20, 0.26
+fire@node155:~/myscripts$ 
+
+
+```
+
+
+### conditional statement 
+
+```
+fire@node155:~/myscripts$ cat check.sh 
+#!/usr/bin/bash
+
+echo  "hey please enter any command to run : "
+
+# read is reading user input and storing into some variable 
+read  x
+
+
+$x &>/dev/null  
+# in linux /dev/null is know as black hole 
+status=`echo $?`
+
+echo $status
+
+
+if [  $status  -eq  0   ]
+then 
+	echo "you have enterd correct command so please wait "
+	sleep 1
+	$x
+
+else 
+	echo "the command $x you have entered is not correct "
+
+fi 
+
+```
