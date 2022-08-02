@@ -2,9 +2,9 @@
 
 ### Linux target 
 
-<img src="ln.png">
+<img src="ln.png" />
 
 ### aws cloud target 
 
-<img src="cl.png">
+<img src="cl.png" />
 
