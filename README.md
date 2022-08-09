@@ -159,3 +159,9 @@ tmpfs          tmpfs     795M     0  795M   0% /run/user/1000
 [root@node2 ~]# 
 
 ```
+
+### Blog link 
+
+[click_here](http://troubleshoot4opensource.blogspot.com/)
+
+
