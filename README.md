@@ -20,5 +20,23 @@
 
 <img src="s32.png">
 
+## s3 creating bucket 
+
+### S3 details 
+
+<ol>
+  <li> S3 bucket and its object (data) are all private by default </li>
+   <li> s3 bucket data want to access -- then we have to use aws account / public  </li>
+
+</ol>
+
+### to Enable bucket with public access 
+
+<img src="bucket_perm.png">
+
+
+### allow by policy 
+
+<img src="pol.png">
 
 
