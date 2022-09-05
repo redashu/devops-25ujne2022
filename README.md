@@ -16,4 +16,9 @@
 
 <img src="iptype.png">
 
+### NAT -- Internal private IP -- to External PUblic IP 
+
+<img src="nat.png">
+
+
 
