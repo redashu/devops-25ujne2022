@@ -8,3 +8,9 @@
 
 <img src="cl.png" />
 
+### TO understand NAAS -- Network as a service -- prerequisite is given below 
+
+<img src="pre.png">
+
+
+
