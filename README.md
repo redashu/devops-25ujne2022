@@ -129,5 +129,26 @@ centos                        latest    5d0da3dc9764   12 months ago   231MB
 
 ```
 
+### using image 
+
+```
+[root@mobi-dockerserver ~]# docker  run -itd --name c2 ashuhttp:v2 
+0f0d952606b43afc45c4820f41aad304595b76b2c56d52d05c0d6245b7580874
+[root@mobi-dockerserver ~]# docker ps
+CONTAINER ID   IMAGE             COMMAND       CREATED         STATUS         PORTS     NAMES
+0f0d952606b4   ashuhttp:v2       "/bin/bash"   2 seconds ago   Up 2 seconds             c2
+67a521c5b7fe   oraclelinux:8.4   "/bin/bash"   3 minutes ago   Up 2 minutes             c1
+[root@mobi-dockerserver ~]# 
+[root@mobi-dockerserver ~]# docker  run -itd --name c3 ashuhttp:v2 httpd -DFOREGROUND 
+38d0d0b411c5a4d8777727ce4bfaf4877865d96ec19cf5d7fcced666c74ee090
+[root@mobi-dockerserver ~]# docker ps
+CONTAINER ID   IMAGE             COMMAND                CREATED          STATUS          PORTS     NAMES
+38d0d0b411c5   ashuhttp:v2       "httpd -DFOREGROUND"   2 seconds ago    Up 1 second               c3
+0f0d952606b4   ashuhttp:v2       "/bin/bash"            50 seconds ago   Up 49 seconds             c2
+67a521c5b7fe   oraclelinux:8.4   "/bin/bash"            4 minutes ago    Up 3 minutes              c1
+[root@mobi-dockerserver ~]# 
+
+```
+
 
 
