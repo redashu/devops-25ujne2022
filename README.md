@@ -163,3 +163,37 @@ PING www.google.com (172.253.122.106): 56 data bytes
 ^C
 
 ```
+
+### NAT 
+
+<img src="nat.png">
+
+### outside people can access contaienr app using host port forwarding 
+
+<img src="portf.png">
+
+###
+
+```
+[root@ip-172-31-91-220 ~]# docker run -d --name c3 -p  1234:80  nginx  
+Unable to find image 'nginx:latest' locally
+latest: Pulling from library/nginx
+31b3f1ad4ce1: Pull complete 
+fd42b079d0f8: Pull complete 
+30585fbbebc6: Pull complete 
+18f4ffdd25f4: Pull complete 
+9dc932c8fba2: Pull complete 
+600c24b8ba39: Pull complete 
+Digest: sha256:0b970013351304af46f322da1263516b188318682b2ab1091862497591189ff1
+Status: Downloaded newer image for nginx:latest
+e784cf1b9b4028c7551ae54d40a7af3f7ff754af0409319ac949c380b9d7750f
+[root@ip-172-31-91-220 ~]# docker  ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                   NAMES
+e784cf1b9b40   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:1234->80/tcp, :::1234->80/tcp   c3
+69e2e0284308   alpine    "/bin/sh"                17 minutes ago       Up 17 minutes                                               c2
+
+```
+
+
+
+
