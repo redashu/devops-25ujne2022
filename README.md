@@ -32,3 +32,11 @@ services:
     container_name: ashuc12
     restart: always # mentionoed 
 ```
+
+
+### Control groups 
+
+```
+ docker  run -itd --name c9 --memory 100M   --restart always alpine ping fb.com
+```
+
