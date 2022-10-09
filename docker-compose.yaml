@@ -1,0 +1,30 @@
+version: '3.8'
+networks:
+  ashubr1:
+  ashubr2: 
+services:
+  ashutwolang-app:
+    image: ashutwolang:v1 
+    build:
+      context: twolang 
+      dockerfile: Dockerfile
+    container_name: ashucc2
+    restart: always 
+    networks: 
+    - ashubr2 
+    environment:
+      lang: "python"
+
+  ashu-customer-app:
+    image: ashucustom:appv1 
+    build: 
+     context: . # location of dockerfile
+     dockerfile: Dockerfile 
+    container_name: ashucc1
+    restart: always 
+    environment:
+      deploy: "webapp1"
+    ports:
+    - "1235:80"
+    networks: 
+    - ashubr1 
