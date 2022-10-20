@@ -74,5 +74,100 @@ Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.3", GitCom
 Kustomize Version: v4.5.7
 ```
 
+### checking auth file in control plane 
+
+```
+[root@control-plane ~]# cd  /etc/kubernetes/
+[root@control-plane kubernetes]# ls
+admin.conf
+```
+
+### making admin.conf file available to all for download
+
+```
+[root@control-plane ~]# cd  /etc/kubernetes/
+[root@control-plane kubernetes]# ls
+admin.conf  controller-manager.conf  kubelet.conf  manifests  pki  scheduler.conf
+[root@control-plane kubernetes]# 
+[root@control-plane kubernetes]# 
+[root@control-plane kubernetes]# yum  install httpd -y
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Repository 'kube' is missing name in configuration, using id
+amzn2-core                                                                                               | 3.7 kB  00:00:00     
+^C[root@control-plane kubernetes]# yum  install httpd -y &>/dev/null 
+[root@control-plane kubernetes]# ls
+admin.conf  controller-manager.conf  kubelet.conf  manifests  pki  scheduler.conf
+[root@control-plane kubernetes]# cp -v admin.conf   /var/www/html/
+'admin.conf' -> '/var/www/html/admin.conf'
+[root@control-plane kubernetes]# vim /var/www/html/admin.conf 
+[root@control-plane kubernetes]# chmod  644 /var/www/html/admin.conf 
+[root@control-plane kubernetes]# systemctl start httpd
+[root@control-plane kubernetes]# 
+
+```
+
+### Now any client can download this file 
+
+```
+fire@ashutoshhs-MacBook-Air ~ % wget http://3.111.75.5/admin.conf
+--2022-10-20 16:40:44--  http://3.111.75.5/admin.conf
+Connecting to 3.111.75.5:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5634 (5.5K) [text/plain]
+Saving to: ‘admin.conf’
+
+admin.conf                    100%[==============================================>]   5.50K  --.-KB/s    in 0s      
+
+2022-10-20 16:40:44 (92.6 MB/s) - ‘admin.conf’ saved [5634/5634]
+
+fire@ashutoshhs-MacBook-Air ~ % ls
+Applications		Library			Public			go
+Desktop			Movies			admin.conf		kubectl
+```
+
+### checking nodes from client 
+
+```
+fire@ashutoshhs-MacBook-Air ~ % kubectl   get  nodes             
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+fire@ashutoshhs-MacBook-Air ~ % 
+fire@ashutoshhs-MacBook-Air ~ % kubectl   get  nodes   --kubeconfig   admin.conf 
+NAME            STATUS   ROLES           AGE   VERSION
+control-plane   Ready    control-plane   47h   v1.25.3
+worker1         Ready    <none>          47h   v1.25.3
+worker2         Ready    <none>          47h   v1.25.3
+fire@ashutoshhs-MacBook-Air ~ % 
+
+```
+
+### checking one more info 
+
+```
+fire@ashutoshhs-MacBook-Air ~ % kubectl  cluster-info    --kubeconfig   admin.conf
+Kubernetes control plane is running at https://3.111.75.5:6443
+CoreDNS is running at https://3.111.75.5:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+fire@ashutoshhs-MacBook-Air ~ %
+```
+
+### storing admin.conf in default location 
+
+```
+fire@ashutoshhs-MacBook-Air ~ % mkdir  ~/.kube 
+mkdir: /Users/fire/.kube: File exists
+fire@ashutoshhs-MacBook-Air ~ % cp -v admin.conf  ~/.kube/config 
+admin.conf -> /Users/fire/.kube/config
+fire@ashutoshhs-MacBook-Air ~ % 
+fire@ashutoshhs-MacBook-Air ~ % kubectl  get  nodes
+NAME            STATUS   ROLES           AGE   VERSION
+control-plane   Ready    control-plane   47h   v1.25.3
+worker1         Ready    <none>          47h   v1.25.3
+worker2         Ready    <none>          47h   v1.25.3
+fire@ashutoshhs-MacBook-Air ~ % 
+
+```
+
 
 
