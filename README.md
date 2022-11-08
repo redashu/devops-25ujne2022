@@ -85,4 +85,31 @@ fire@ashutoshhs-MacBook-Air ~ %
 
 ```
 
+### yaml 
+
+```
+fire@ashutoshhs-MacBook-Air ~ % cat Desktop/kubernetes/nodeportsvc.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashusvc1
+  name: ashusvc1
+spec:
+  ports:
+  - name: 1234-80
+    port: 1234
+    protocol: TCP
+    targetPort: 80
+  selector: # this must have label of pod
+    app: green
+  type: NodePort
+status:
+  loadBalancer: {}
+fire@ashutoshhs-MacBook-Air ~ %
+```
+
+
+
 
