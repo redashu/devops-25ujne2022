@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ashupodx1
+spec:
+  imagePullSecrets: # calling secret 
+  - name: ashu-cred # name of secret 
+  containers:
+  - name: ashucc1
+    image: dockerashu/ashuapp:v001
