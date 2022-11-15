@@ -72,3 +72,49 @@ fire@ashutoshhs-MacBook-Air Desktop %
 
 ```
 
+### mention namespace entry in YAML 
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupodx3
+  name: ashupodx3
+  namespace: kube-public # namespace field 
+spec:
+  containers:
+  - image: nginx
+    name: ashupodx3
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+```
+
+### apply if 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po,svc -n kube-public
+No resources found in kube-public namespace.
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl apply -f auto.yaml -f np11.yaml 
+pod/ashupodx3 created
+service/ashulb1 created
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po,svc -n kube-public     
+NAME            READY   STATUS              RESTARTS   AGE
+pod/ashupodx3   0/1     ContainerCreating   0          2s
+
+NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/ashulb1   NodePort   10.108.67.129   <none>        1234:30332/TCP   2s
+fire@ashutoshhs-MacBook-Air kubernetes % 
+
+```
+
+
+
