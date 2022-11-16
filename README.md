@@ -116,5 +116,69 @@ fire@ashutoshhs-MacBook-Air kubernetes %
 
 ```
 
+## Networking in k8s 
+
+<img src="net001.png">
+
+### choosing CNI over CNM by k8s 
+
+<img src="cini001.png">
+
+### pods by default can communicate to each other even they are in different systems 
+
+<img src="pod00net1.png">
+
+### lets verify that project calico is OUR CNI 
+
+```
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  get po 
+No resources found in ashu-space namespace.
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  run ashupod1 --image=alpine --command sleep 10000 
+pod/ashupod1 created
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  get  po 
+NAME       READY   STATUS              RESTARTS   AGE
+ashupod1   0/1     ContainerCreating   0          3s
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  get  po 
+NAME       READY   STATUS    RESTARTS   AGE
+ashupod1   1/1     Running   0          6s
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  get  po -o wide
+NAME       READY   STATUS    RESTARTS   AGE   IP                NODE      NOMINATED NODE   READINESS GATES
+ashupod1   1/1     Running   0          10s   192.168.235.148   worker1   <none>           <none>
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  describe pod ashupod1 
+Name:             ashupod1
+Namespace:        ashu-space
+Priority:         0
+Service Account:  default
+Node:             worker1/172.31.32.194
+Start Time:       Wed, 16 Nov 2022 17:32:41 +0530
+Labels:           run=ashupod1
+Annotations:      cni.projectcalico.org/containerID: 6a1bb5970fb6751744c6c1e7e4113ba400ca975130bb1a4113dc4f7d090e98f2
+                  cni.projectcalico.org/podIP: 192.168.235.148/32
+                  cni.projectcalico.org/podIPs: 192.168.235.148/32
+Status:           Running
+IP:               192.168.235.148
+IPs:
+  IP:  192.168.235.148
+Containers:
+
+```
+
+## OR 
+
+```
+
+fire@ashutoshhs-MacBook-Air Desktop % kubectl  get po -n kube-system                             
+NAME                                       READY   STATUS    RESTARTS      AGE
+calico-kube-controllers-58dbc876ff-vjrt8   1/1     Running   8 (32m ago)   29d
+calico-node-8sdk7                          1/1     Running   8 (32m ago)   29d
+calico-node-d4zcc                          1/1     Running   8 (32m ago)   29d
+calico-node-qzvk8                          1/1     Running   8 (33m ago)   29d
+```
+
+
+
+
+
+
 
 
