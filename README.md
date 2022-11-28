@@ -175,6 +175,76 @@ calico-node-d4zcc                          1/1     Running   8 (32m ago)   29d
 calico-node-qzvk8                          1/1     Running   8 (33m ago)   29d
 ```
 
+# COntroller in k8s 
+
+### k8s Nativ controllers 
+
+<img src="contr.png">
+
+### REplication controllers to scale pods  (horizentally)
+
+<img src="rc1.png">
+
+### YAML of RC 
+
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: ashu-rc-1 # name of rc 
+spec: 
+  replicas: 1 # number of pods we want 
+  template:
+    metadata:
+      labels: # lable of pods 
+        x: helloashu
+    spec:
+      containers:
+      - name: ashuc1 
+        image: nginx 
+        ports:
+        - containerPort: 80 
+```
+
+### lets do it 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl apply -f rc1.yaml
+replicationcontroller/ashu-rc-1 created
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  rc 
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   1         1         1       6s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po 
+NAME              READY   STATUS    RESTARTS   AGE
+ashu-rc-1-5gm4z   1/1     Running   0          13s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl delete pod ashu-rc-1-5gm4z
+pod "ashu-rc-1-5gm4z" deleted
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po                   
+NAME              READY   STATUS    RESTARTS   AGE
+ashu-rc-1-rkcst   1/1     Running   0          4s
+fire@ashutoshhs-MacBook-Air kubernetes % 
+```
+
+### scaling pod without yaml change 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  rc             
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   1         1         1       2m30s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  scale rc  ashu-rc-1 --replicas=5
+replicationcontroller/ashu-rc-1 scaled
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  rc                         
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   5         5         5       2m46s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po                          
+NAME              READY   STATUS    RESTARTS   AGE
+ashu-rc-1-6jp6v   1/1     Running   0          9s
+ashu-rc-1-d49hj   1/1     Running   0          9s
+ashu-rc-1-rkcst   1/1     Running   0          2m26s
+ashu-rc-1-rvb9z   1/1     Running   0          9s
+```
+
 
 
 
