@@ -246,6 +246,29 @@ ashu-rc-1-rvb9z   1/1     Running   0          9s
 ```
 
 
+### creating service using expose 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  rc
+NAME        DESIRED   CURRENT   READY   AGE
+ashu-rc-1   3         3         3       23h
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  expose  rc  ashu-rc-1  --type NodePort --port 80 --name xyzsvc
+service/xyzsvc exposed
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  svc
+NAME         TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+ashulb0099   NodePort   10.109.174.125   <none>        1234:31827/TCP   4m15s
+xyzsvc       NodePort   10.104.173.221   <none>        80:30549/TCP     4s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  ep 
+NAME         ENDPOINTS                                                 AGE
+ashulb0099   192.168.189.77:80,192.168.235.171:80,192.168.235.188:80   4m30s
+xyzsvc       192.168.189.77:80,192.168.235.171:80,192.168.235.188:80   19s
+fire@ashutoshhs-MacBook-Air kubernetes % 
+
+
+
+```
 
 
 
