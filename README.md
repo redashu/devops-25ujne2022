@@ -270,6 +270,15 @@ fire@ashutoshhs-MacBook-Air kubernetes %
 
 ```
 
+## How to deploy app in real world to be accessed by DNS name 
+
+<img src="dns.png">
+
+### How ingress is helping to avoid multiple LB 
+
+<img src="ingress.png">
+
+
 
 
 
