@@ -279,6 +279,76 @@ fire@ashutoshhs-MacBook-Air kubernetes %
 <img src="ingress.png">
 
 
+## lets test ingress with Deployment controller 
+
+### creating Deployment to deploy webapp 
+
+```
+kubectl create deployment  ashu-deploy1  --image=docker.io/dockerashu/ashuapp:appv1  --port 80  --dry-run=client -o yaml  >deploy1.yaml 
+```
+### lets deploy it 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl apply -f deploy1.yaml 
+deployment.apps/ashu-deploy1 created
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get deployment      
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-deploy1   0/1     1            0           5s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get deploy     
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-deploy1   1/1     1            1           7s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get rs    
+NAME                      DESIRED   CURRENT   READY   AGE
+ashu-deploy1-74c9f59b6c   1         1         1       12s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po
+NAME                            READY   STATUS    RESTARTS   AGE
+ashu-deploy1-74c9f59b6c-c9nrt   1/1     Running   0          15s
+fire@ashutoshhs-MacBook-Air kubernetes % 
+```
+
+### scaling 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl get deploy
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-deploy1   1/1     1            1           39s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl scale deployment ashu-deploy1 --replicas=3
+deployment.apps/ashu-deploy1 scaled
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl get deploy                                
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-deploy1   2/3     3            2           49s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get po -o wide                           
+NAME                            READY   STATUS              RESTARTS   AGE   IP                NODE      NOMINATED NODE   READINESS GATES
+ashu-deploy1-74c9f59b6c-c9nrt   1/1     Running             0          53s   192.168.189.104   worker2   <none>           <none>
+ashu-deploy1-74c9f59b6c-pl7cq   1/1     Running             0          5s    192.168.189.93    worker2   <none>           <none>
+ashu-deploy1-74c9f59b6c-vhkzg   0/1     ContainerCreating   0          5s    <none>            worker1   <none>           <none>
+fire@ashutoshhs-MacBook-Air kubernetes % 
+
+```
+
+### creating service of either LB / NP type 
+
+```
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  get  deploy 
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashu-deploy1   3/3     3            3           110s
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  expose deployment ashu-deploy1 --type LoadBalancer --port 80 --name ashulb1 
+service/ashulb1 exposed
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl get svc
+NAME      TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+ashulb1   LoadBalancer   10.103.87.178   <pending>     80:32206/TCP   4s
+fire@ashutoshhs-MacBook-Air kubernetes % 
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl  expose deployment ashu-deploy1 --type NodePort --port 80 --name ashulb2 
+service/ashulb2 exposed
+fire@ashutoshhs-MacBook-Air kubernetes % kubectl get svc                                                                  
+NAME      TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+ashulb1   LoadBalancer   10.103.87.178   <pending>     80:32206/TCP   21s
+ashulb2   NodePort       10.101.178.32   <none>        80:30150/TCP   2s
+fire@ashutoshhs-MacBook-Air kubernetes % 
+
+```
+
 
 
 
