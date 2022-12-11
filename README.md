@@ -407,6 +407,32 @@ fire@ashutoshhs-MacBook-Air ingress-app %
 
 ```
 
+### updating image 
+
+```
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl set image deployment d1  ashuapp=dockerashu/ashuapp:appv1 
+deployment.apps/d1 image updated
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl get rs                                                   
+NAME            DESIRED   CURRENT   READY   AGE
+d1-5954b7bf4b   0         0         0       4m53s
+d1-6d7ddf6bb7   1         1         1       56s
+d1-7d987b5bcc   3         3         2       16m
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl get rs
+NAME            DESIRED   CURRENT   READY   AGE
+d1-5954b7bf4b   0         0         0       5m5s
+d1-6d7ddf6bb7   0         0         0       68s
+d1-7d987b5bcc   3         3         3       16m
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl set image deployment d1  ashuapp=dockerashu/ashuapp:appv2
+deployment.apps/d1 image updated
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl get rs                                                   
+NAME            DESIRED   CURRENT   READY   AGE
+d1-5954b7bf4b   2         2         1       5m21s
+d1-6d7ddf6bb7   0         0         0       84s
+d1-7d987b5bcc   2         2         2       16m
+fire@ashutoshhs-MacBook-Air ingress-app % 
+```
+
+
 
 
 
