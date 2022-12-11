@@ -349,6 +349,64 @@ fire@ashutoshhs-MacBook-Air kubernetes %
 
 ```
 
+### setup nginx ingress controller 
+
+```
+fire@ashutoshhs-MacBook-Air ~ % kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml
+namespace/ingress-nginx created
+serviceaccount/ingress-nginx created
+serviceaccount/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress
+```
+
+## lets implement project with ingress in custom namepsace 
+
+### creating ns 
+
+```
+ kubectl create ns ashu-project 
+ kubectl config set-context --current --namespace=ashu-project
+ 
+```
+
+### deploy 
+
+```
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl create deployment d1 --image=dockerashu/ashuapp:appv1 --port 80 --dry-run=clie
+nt -o yaml  >deploy.yaml 
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl apply -f deploy.yaml 
+deployment.apps/d1 created
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl get deploy 
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+d1     1/1     1            1           6s
+```
+
+### creating service 
+
+```
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl expose deploy d1 --type ClusterIP --port 80 --name ashulb1 --dry-run=client -o yaml >svc.yaml 
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl apply -f svc.yaml 
+service/ashulb1 created
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl get  svc
+NAME      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+ashulb1   ClusterIP   10.96.102.2   <none>        80/TCP    4s
+```
+
+### creating ingress rule 
+
+```
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl apply -f ingress.yaml 
+ingress.networking.k8s.io/ashu-app-rule created
+fire@ashutoshhs-MacBook-Air ingress-app % kubectl get ingress
+NAME            CLASS   HOSTS                 ADDRESS   PORTS   AGE
+ashu-app-rule   nginx   jaipur.ashutoshh.in             80      4s
+fire@ashutoshhs-MacBook-Air ingress-app % 
+
+
+```
+
 
 
 
