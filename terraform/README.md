@@ -39,7 +39,46 @@ Default region name [us-east-1]: ap-south-1
 Default output format [None]: 
 fire@ashutoshhs-MacBook-Air Desktop % 
 
+```
 
+### creating ec2 instance 
+
+### first tf script 
+
+```
+provider "aws" {
+    region = "ap-south-1"
+    access_key = "A"
+    secret_key  = "Dwhcnxm"
+}
+
+resource "aws_instance" "ashuvm" {
+    ami = "ami-01a4f99c4ac11b03c"
+    instance_type =  "t2.micro"
+    key_name =  "nikhil_training_keypair" # already existing 
+  
+}
+```
+
+### on the same location you run these command 
+
+```
+fire@ashutoshhs-MacBook-Air terraform % ls
+awsvm.tf
+```
+
+### Init -- plan --apply 
+
+```
+terraform init 
+terraform plan 
+terraform apply 
+```
+
+### to destroy 
+
+```
+terraform destroy 
 ```
 
 
