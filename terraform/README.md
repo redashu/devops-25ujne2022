@@ -97,5 +97,14 @@ resource "aws_instance" "ashuvm" {
 
 ```
 
+### commands 
+
+```
+ 1017  terraform apply --auto-approve 
+fire@ashutoshhs-MacBook-Air terraform % terraform destroy --auto-approve 
+```
+
+
+
 
 
