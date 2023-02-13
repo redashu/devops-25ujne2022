@@ -1,0 +1,34 @@
+variable "ashu-var" {
+  type        = string
+  description = "i will store ami name"
+  default     = "ami-01a4f99c4ac11b03c" 
+  validation {
+    condition = can(regex("^ami-",var.ashu-var))
+    error_message = "this aws AMI is not valid"
+    
+  }
+
+}
+variable "ashu-var9" {
+  type        = string
+  description = "i will store ami name"
+  default     = "t2.micro"
+}
+
+
+variable "ashu-var1" {
+
+  type        = number
+  description = "here i will write some number"
+  default     = 4
+  validation {
+    condition = var.ashu-var1 > 5 
+    error_message = "minimum instances are not statisfied"
+}
+}
+variable "ashu-var2" {
+  type        = bool
+  description = "i will this in some aws true false function"
+  default     = true
+
+}
