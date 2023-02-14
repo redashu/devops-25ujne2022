@@ -105,6 +105,10 @@ fire@ashutoshhs-MacBook-Air terraform % terraform destroy --auto-approve
 ```
 
 
+### Terraform output command 
+
+<img src="out1.png">
+
 
 
 
